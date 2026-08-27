@@ -1,102 +1,724 @@
-<!DOCTYPE html>
+from pathlib import Path
+from PIL import Image
+
+out = Path("/mnt/data/uzaykaraman-site")
+out.mkdir(exist_ok=True)
+
+src = Path("/mnt/data/ChatGPT Image 3 Nis 2026 17_01_50.png")
+img = Image.open(src).convert("RGB")
+img.thumbnail((1400, 1400))
+profile_path = out / "profile.jpg"
+img.save(profile_path, quality=90, optimize=True)
+
+html = r'''<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Uzay Karaman | Muhammed Uzay Karaman</title>
+  <title>Muhammed Uzay Karaman | E-Commerce Management & Digital Business</title>
+  <meta name="description" content="Muhammed Uzay Karaman, also known as Uzay Karaman and Muhammed Karaman. E-Commerce Management & Digital Business professional." />
+  <meta name="author" content="Muhammed Uzay Karaman" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://uzaykaraman.github.io/" />
 
-  <meta name="description"
-        content="Uzay Karaman, Muhammed Uzay Karaman ve Muhammed Karaman. E-commerce, e-business ve financial analysis alanlarında çalışan profesyonel.">
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Muhammed Uzay Karaman | E-Commerce Management & Digital Business" />
+  <meta property="og:description" content="Personal website of Muhammed Uzay Karaman — E-Commerce Management & Digital Business." />
+  <meta property="og:url" content="https://uzaykaraman.github.io/" />
+  <meta property="og:image" content="https://uzaykaraman.github.io/profile.jpg" />
 
-  <link rel="canonical" href="https://uzaykaraman.github.io/">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Muhammed Uzay Karaman" />
+  <meta name="twitter:description" content="E-Commerce Management & Digital Business" />
+  <meta name="twitter:image" content="https://uzaykaraman.github.io/profile.jpg" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
+    "@id": "https://uzaykaraman.github.io/#profilepage",
     "url": "https://uzaykaraman.github.io/",
+    "name": "Muhammed Uzay Karaman",
     "mainEntity": {
       "@type": "Person",
       "@id": "https://uzaykaraman.github.io/#person",
-
       "name": "Muhammed Uzay Karaman",
-
       "alternateName": [
         "Muhammed Karaman",
         "Uzay Karaman"
       ],
-
       "givenName": "Muhammed Uzay",
       "familyName": "Karaman",
-
       "url": "https://uzaykaraman.github.io/",
-
+      "image": "https://uzaykaraman.github.io/profile.jpg",
       "jobTitle": "Senior E-Business Specialist",
-
       "sameAs": [
         "https://www.linkedin.com/in/muhammedkaraman98/",
         "https://www.instagram.com/uzaykaraman/",
         "https://x.com/UzayKaraman"
-      ]
+      ],
+      "email": "mailto:uzaykaraman@outlook.com"
     }
   }
   </script>
 
   <style>
+    :root {
+      --bg: #08090b;
+      --surface: rgba(255,255,255,.045);
+      --surface-strong: rgba(255,255,255,.075);
+      --text: #f5f5f7;
+      --muted: #9b9ba1;
+      --line: rgba(255,255,255,.12);
+      --accent: #b9c7ff;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 80px auto;
-      padding: 20px;
-      line-height: 1.6;
+      margin: 0;
+      background:
+        radial-gradient(circle at 82% 14%, rgba(96,116,190,.16), transparent 31rem),
+        radial-gradient(circle at 15% 36%, rgba(255,255,255,.045), transparent 27rem),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                   "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(8,9,11,.72);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 750;
+      letter-spacing: -.03em;
+      font-size: 16px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .lang-switch {
+      display: inline-flex;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .lang-switch button.active {
+      background: var(--text);
+      color: #0b0c0f;
+    }
+
+    .hero {
+      min-height: calc(100vh - 68px);
+      display: grid;
+      grid-template-columns: minmax(0,1.05fr) minmax(360px,.95fr);
+      align-items: center;
+      gap: 72px;
+      padding: 72px 0 84px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     h1 {
-      margin-bottom: 5px;
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(54px, 7vw, 104px);
+      line-height: .94;
+      letter-spacing: -.065em;
+      font-weight: 760;
     }
 
-    .name {
-      color: #555;
-      margin-top: 0;
+    .headline {
+      margin: 28px 0 0;
+      max-width: 700px;
+      font-size: clamp(22px, 2.5vw, 34px);
+      line-height: 1.18;
+      letter-spacing: -.035em;
+      color: #d9d9dd;
+      font-weight: 520;
     }
 
-    .links {
-      margin-top: 30px;
+    .hero-actions {
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .links a {
-      margin-right: 20px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.primary {
+      color: #0a0b0d;
+      background: var(--text);
+      border-color: var(--text);
+    }
+
+    .btn.secondary { background: rgba(255,255,255,.04); }
+
+    .portrait-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      justify-self: end;
+    }
+
+    .portrait-glow {
+      position: absolute;
+      inset: 12% -7% -8% 8%;
+      background: radial-gradient(circle, rgba(144,162,235,.22), transparent 64%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    .portrait-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,.13);
+      background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.025));
+      box-shadow: 0 30px 90px rgba(0,0,0,.36);
+      aspect-ratio: 4 / 5;
+    }
+
+    .portrait-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,9,11,.35), transparent 42%);
+      pointer-events: none;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 35%;
+      transform: scale(1.035);
+      filter: saturate(.88) contrast(1.03);
+    }
+
+    section {
+      padding: 120px 0;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .section-label {
+      position: sticky;
+      top: 100px;
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 700;
+    }
+
+    .about-copy {
+      max-width: 830px;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+      color: #e9e9ec;
+      margin: 0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 150px 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .year {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .company {
+      margin: 0 0 5px;
+      font-size: 22px;
+      letter-spacing: -.025em;
+    }
+
+    .role {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 22px rgba(185,199,255,.8);
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .edu-card {
+      min-height: 230px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(145deg, var(--surface-strong), var(--surface));
+    }
+
+    .edu-card .degree {
+      margin: 0 0 52px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .edu-card h3 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      letter-spacing: -.035em;
+    }
+
+    .edu-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .contact {
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-inner { width: 100%; }
+
+    .contact h2 {
+      margin: 0 0 36px;
+      font-size: clamp(58px, 9vw, 132px);
+      letter-spacing: -.07em;
+      line-height: .9;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-links a {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+      color: #d8d8dc;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .contact-links a:hover {
+      background: rgba(255,255,255,.08);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    [data-lang] { display: none; }
+    html[data-current-lang="tr"] [data-lang="tr"] { display: initial; }
+    html[data-current-lang="en"] [data-lang="en"] { display: initial; }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 42px;
+        padding-top: 54px;
+      }
+
+      .portrait-wrap {
+        justify-self: start;
+        max-width: 560px;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .section-label { position: static; }
+
+      .timeline-item {
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+      }
+
+      .year {
+        grid-column: 1 / -1;
+      }
+
+      .education-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
+
+      nav { min-height: 62px; }
+
+      .brand { font-size: 14px; }
+
+      .hero {
+        min-height: auto;
+        padding: 46px 0 72px;
+      }
+
+      h1 { font-size: clamp(48px, 15vw, 72px); }
+
+      .headline {
+        margin-top: 22px;
+        font-size: 23px;
+      }
+
+      .portrait-card { border-radius: 24px; }
+
+      section { padding: 84px 0; }
+
+      .about-copy { font-size: 31px; }
+
+      .timeline-item { padding: 23px 0; }
+
+      .company { font-size: 20px; }
+
+      .edu-card { min-height: 200px; }
+
+      .contact { min-height: 60vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-up { opacity: 1; transform: none; transition: none; }
+      .btn, .contact-links a { transition: none; }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="shell">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top">MUK.</a>
 
-  <main>
-    <h1>Uzay Karaman</h1>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#about"><span data-lang="tr">Hakkımda</span><span data-lang="en">About</span></a>
+            <a href="#experience"><span data-lang="tr">Deneyim</span><span data-lang="en">Experience</span></a>
+            <a href="#education"><span data-lang="tr">Eğitim</span><span data-lang="en">Education</span></a>
+            <a href="#contact"><span data-lang="tr">İletişim</span><span data-lang="en">Contact</span></a>
+          </div>
 
-    <p class="name">
-      Muhammed Uzay Karaman
-    </p>
+          <div class="lang-switch" aria-label="Language selector">
+            <button type="button" id="langTR" class="active">TR</button>
+            <button type="button" id="langEN">EN</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <p>
-      Muhammed Karaman, dijital platformlarda Uzay Karaman adını kullanan
-      e-commerce ve e-business profesyonelidir.
-    </p>
+  <main id="top">
+    <div class="shell">
+      <section class="hero" style="border-top:0">
+        <div class="hero-copy fade-up">
+          <p class="eyebrow">Muhammed Karaman · Uzay Karaman</p>
+          <h1>Muhammed<br>Uzay Karaman</h1>
+          <p class="headline">E-Commerce Management &amp; Digital Business</p>
 
-    <p>
-      E-Commerce • E-Business • Financial Analysis
-    </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#about">
+              <span data-lang="tr">Hakkımda</span><span data-lang="en">About Me</span>
+            </a>
+            <a class="btn secondary" href="#contact">
+              <span data-lang="tr">İletişime Geç</span><span data-lang="en">Get in Touch</span>
+            </a>
+          </div>
+        </div>
 
-    <div class="links">
-      <a href="https://www.linkedin.com/in/muhammedkaraman98/">LinkedIn</a>
+        <div class="portrait-wrap fade-up">
+          <div class="portrait-glow"></div>
+          <div class="portrait-card">
+            <img src="profile.jpg" alt="Muhammed Uzay Karaman" width="1400" height="1400" fetchpriority="high">
+          </div>
+        </div>
+      </section>
 
-      <a href="https://www.instagram.com/uzaykaraman/">Instagram</a>
+      <section id="about">
+        <div class="section-grid">
+          <p class="section-label">
+            <span data-lang="tr">Hakkımda</span><span data-lang="en">About</span>
+          </p>
 
-      <a href="https://x.com/UzayKaraman">X</a>
+          <p class="about-copy fade-up">
+            <span data-lang="tr">
+              Dijital iş, e-ticaret, pazaryeri operasyonları, entegrasyonlar ve veri odaklı büyüme alanlarında çalışan bir e-ticaret profesyoneliyim.
+            </span>
+            <span data-lang="en">
+              I am an e-commerce professional focused on digital business, marketplace operations, integrations and data-driven growth.
+            </span>
+          </p>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-grid">
+          <p class="section-label">
+            <span data-lang="tr">Deneyim</span><span data-lang="en">Experience</span>
+          </p>
+
+          <div class="timeline fade-up">
+            <article class="timeline-item">
+              <div class="year">2025 — <span data-lang="tr">Günümüz</span><span data-lang="en">Present</span></div>
+              <div>
+                <h3 class="company">Würth Türkiye</h3>
+                <p class="role">Senior E-Business Specialist</p>
+              </div>
+              <span class="dot" aria-hidden="true"></span>
+            </article>
+
+            <article class="timeline-item">
+              <div class="year">2022 — 2025</div>
+              <div>
+                <h3 class="company">Shipsland Logistics</h3>
+                <p class="role">E-Commerce &amp; BI Coordinator</p>
+              </div>
+              <span class="dot" aria-hidden="true"></span>
+            </article>
+
+            <article class="timeline-item">
+              <div class="year">2021 — 2022</div>
+              <div>
+                <h3 class="company">Freelance</h3>
+                <p class="role">Digital Marketing Strategist</p>
+              </div>
+              <span class="dot" aria-hidden="true"></span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="section-grid">
+          <p class="section-label">
+            <span data-lang="tr">Eğitim</span><span data-lang="en">Education</span>
+          </p>
+
+          <div class="education-grid fade-up">
+            <article class="edu-card">
+              <p class="degree">
+                <span data-lang="tr">Yüksek Lisans</span><span data-lang="en">Master's Degree</span>
+              </p>
+              <h3>Istanbul University</h3>
+              <p>
+                <span data-lang="tr">Finansal Yönetim</span><span data-lang="en">Financial Management</span>
+              </p>
+            </article>
+
+            <article class="edu-card">
+              <p class="degree">
+                <span data-lang="tr">Lisans</span><span data-lang="en">Bachelor's Degree</span>
+              </p>
+              <h3>Sakarya University</h3>
+              <p>
+                <span data-lang="tr">İktisat</span><span data-lang="en">Economics</span>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="contact-inner fade-up">
+          <p class="section-label" style="position:static;margin-bottom:24px;">
+            <span data-lang="tr">İletişim</span><span data-lang="en">Contact</span>
+          </p>
+
+          <h2>Get in Touch</h2>
+
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/muhammedkaraman98/" target="_blank" rel="me noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/uzaykaraman/" target="_blank" rel="me noopener">Instagram</a>
+            <a href="https://x.com/UzayKaraman" target="_blank" rel="me noopener">X</a>
+            <a href="mailto:uzaykaraman@outlook.com">uzaykaraman@outlook.com</a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
+  <footer>
+    <div class="shell">© 2026 Muhammed Uzay Karaman</div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const trButton = document.getElementById('langTR');
+    const enButton = document.getElementById('langEN');
+
+    function setLanguage(lang) {
+      root.setAttribute('data-current-lang', lang);
+      root.lang = lang;
+      trButton.classList.toggle('active', lang === 'tr');
+      enButton.classList.toggle('active', lang === 'en');
+      localStorage.setItem('uzaykaraman-lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('uzaykaraman-lang');
+    setLanguage(savedLang === 'en' ? 'en' : 'tr');
+
+    trButton.addEventListener('click', () => setLanguage('tr'));
+    enButton.addEventListener('click', () => setLanguage('en'));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
+'''
+
+index_path = out / "index.html"
+index_path.write_text(html, encoding="utf-8")
+
+robots = """User-agent: *
+Allow: /
+
+Sitemap: https://uzaykaraman.github.io/sitemap.xml
+"""
+(out / "robots.txt").write_text(robots, encoding="utf-8")
+
+sitemap = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://uzaykaraman.github.io/</loc>
+  </url>
+</urlset>
+"""
+(out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+
+import zipfile
+zip_path = Path("/mnt/data/uzaykaraman-site.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for p in out.iterdir():
+        z.write(p, p.name)
+
+print(f"Created: {index_path}")
+print(f"Created: {profile_path}")
+print(f"Created: {zip_path}")
