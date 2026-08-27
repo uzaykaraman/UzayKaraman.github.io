@@ -680,33 +680,3 @@
   </script>
 </body>
 </html>
-'''
-
-index_path = out / "index.html"
-index_path.write_text(html, encoding="utf-8")
-
-robots = """User-agent: *
-Allow: /
-
-Sitemap: https://uzaykaraman.github.io/sitemap.xml
-"""
-(out / "robots.txt").write_text(robots, encoding="utf-8")
-
-sitemap = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://uzaykaraman.github.io/</loc>
-  </url>
-</urlset>
-"""
-(out / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-
-import zipfile
-zip_path = Path("/mnt/data/uzaykaraman-site.zip")
-with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-    for p in out.iterdir():
-        z.write(p, p.name)
-
-print(f"Created: {index_path}")
-print(f"Created: {profile_path}")
-print(f"Created: {zip_path}")
